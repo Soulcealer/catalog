@@ -1,0 +1,50 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+<div class = 'flash'>
+		      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+          
+        <ul>
+        {% for message in messages %}
+            <li> <strong> {{ message }} </strong> </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+
+</div>
+	<div class="row padding-top padding-bottom">
+		<div class="col-md-1"></div>
+		<div class="col-md-11 padding-none">
+			<a href="{{url_for('newObject', catagory_name = catagory.name )}}">
+				<button class="btn btn-default" id="new-object-item">
+					<span class="glyphicon glyphicon-glass" aria-hidden="true"></span>Add Object
+				</button>
+			</a>
+						<a href="{{url_for('deleteCatagory', catagory_name = catagory.name )}}">
+				<button class="btn btn-default delete" id="delete-catagory">
+					<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Delete Catagory
+				</button>
+			</a>
+		</div>
+		<div class="col-md-7"></div>
+	</div>
+	
+	{% if objects !=[] %}	
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-10">
+				{% for object in objects %}
+					<div class="object-item">
+						<a href = "{{url_for('showDescription', catagory_name = catagory.name, object_name = object.name)}}">
+						<h2>{{object.name}}</h2>						
+						<a href='{{url_for('editObject', catagory_name = catagory.name, object_name=object.name ) }}'>Edit</a> | 
+						<a href='{{url_for('deleteObject', catagory_name = catagory.name, object_name=object.name ) }}'>Delete</a>
+					</div>
+				{% endfor %}
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+	{% endif %}
+{% endblock %}

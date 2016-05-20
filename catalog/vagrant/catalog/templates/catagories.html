@@ -1,0 +1,51 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+	<div class = 'flash'>
+			      {% with messages = get_flashed_messages() %}
+	      {% if messages %}
+	          
+	        <ul>
+	        {% for message in messages %}
+	            <li> <strong> {{ message }} </strong> </li>
+	        {% endfor %}
+	        </ul>
+	        {% endif %}
+	    {% endwith %}
+
+	</div>
+	
+	<div class="row padding-top padding-bottom">
+		<div class="col-md-7 padding-none">
+			<a href="{{url_for('newCatagory')}}">
+				<div class="row">
+					<button class="btn btn-default" id="new-catagory">
+						<span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>Add Catagory
+					</button>
+				</div>
+			</a>			
+		</div>
+		<div class="col-md-1"></div>
+	</div>
+	<div class="col-md-4"><h2>Categories</h2></div>
+	<div class="col-md-7"><h2>Latest Items</h2></div>
+	<div class="col-md-4 catagory-list">		
+		{% for catagory in catagories %}
+			<a href = "{{url_for('showObject', catagory_name = catagory.name)}}">
+				<div class="row">
+					<h3>{{catagory.name}}</h3>
+				</div>			
+			</a>
+		{% endfor %}
+	</div>
+	<div class="col-md-7 catagory-list">
+		
+			{% for object in objects %}
+				<a href = "{{url_for('showDescriptionRedirect', catagory_id = object[0].catagory_id, object_name = object[0].name)}}">
+					<div class="row">
+						<h3>{{object[0].name}} ( {{object[1]}} )</h3>
+					</div>
+			{% endfor %}
+	</div>
+	<div class="col-md-1"></div>
+{% endblock %}

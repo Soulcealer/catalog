@@ -1,0 +1,17 @@
+<div class="row top-object">
+	<div class="row banner main blue">
+		<div class="col-md-1"></div>
+		<div class="col-md-9 padding-none">
+			<a href="{{url_for('showCatagories')}}">
+				<h1><font color="white">Catalog App</font></h1>
+			</a>
+		</div>
+		<div class="col-md-2 text-right">
+			{%if 'username' not in session %}
+				<a href="{{url_for('showLogin')}}" class=btn><font color="white">Login</font></a>
+			{% else %}
+				<a href="{{url_for('disconnect')}}" class=btn><font color="white">Logout</font></a>
+			{% endif %}
+		</div>
+	</div>
+</div>

@@ -1,0 +1,13 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.provision "shell", path: "pg_config.sh"
+  # config.vm.box = "hashicorp/precise32"
+  config.vm.box = "ubuntu/trusty32"
+  config.vm.network "forwarded_port", guest: 8060, host: 8060
+  config.vm.network "forwarded_port", guest: 8050, host: 8050
+  config.vm.network "forwarded_port", guest: 5040, host: 5040
+end
